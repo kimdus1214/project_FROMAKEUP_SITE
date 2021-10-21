@@ -27,7 +27,8 @@ const Navi = styled.li`
 `;
 
 function NaviBar() {
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => state.user);
+    //console.log(user.userData);
 
     if (user.userData && !user.userData.isAuth) {
         return (

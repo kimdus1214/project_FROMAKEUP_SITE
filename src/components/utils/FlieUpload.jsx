@@ -25,14 +25,19 @@ const FileUploadWrap = styled.div`
 `;
 const FileConfirm = styled.div`
     display: flex;
-    width: 350px;
-    height: 340px;
-    overflow: scroll
+    width: 400px;
+    height: 240px;
+    overflow-y: scroll;
     
-    img{
-        min-width: 300px;
-        width: 300px;
-        overflow-x: scroll;
+    div{
+        width: 100%;
+        height: 100%;
+
+        img{
+            min-width: 300px;
+            width: 300px;
+            overflow-x: scroll;
+        }
     }
 `;
 
