@@ -94,7 +94,7 @@ function FlieUpload(props) {
             <FileConfirm>
                 {Images.map((image, index)=>(
                     <div key={index} onClick={()=>deleteHandler(image)}>
-                        <img src={`http://localhost:8000/${image}`}/>
+                        <img src={`http://localhost:8000/${image}`} alt={index} />
                     </div>
                 ))}
             </FileConfirm>

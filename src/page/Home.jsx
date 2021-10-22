@@ -1,6 +1,11 @@
 import React,{useEffect,useState} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import 'antd/dist/antd.css';
+import {Row , Col , Card} from 'antd';
+import Meta from 'antd/lib/card/Meta';
+import ImgSlider from '../components/utils/ImgSlider';
+
 
 const HomeBlock = styled.div`
     width: 75%;
@@ -20,37 +25,56 @@ const AddMoreBtn = styled.button`
 
 `;
 
-const CardBlock = styled.ul`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-`;
-
-const CardList = styled.li`
-    width: 24%;
-    height: 350px;
-    border: 1px solid #ddd;
-`;
-
 function Home() {
     const [Products, setProducts] = useState([]);
+    const [Skip, setSkip] = useState(1); //불러올 때 0부터 시작
+    const [Limit, setLimit] = useState(8); //몇 개씩 불러올껀지
+    const [PostSize, setPostSize] = useState(0);
 
     useEffect(() => {
-        // let body = {}
-        axios.post('/product/products')
+        let body = {
+            skip: Skip,
+            limit: Limit
+        }
+        getProducts(body);
+    }, [])
+
+    const getProducts = (body)=>{
+        axios.post('/product/products', body)
         .then(response=>{
             if(response.data.success){
-                setProducts(response.data.productsInfo);
+                if(body.loadMore){
+                    setProducts([...Products, ...response.data.productsInfo]);
+                }else{
+                    setProducts(response.data.productsInfo);
+                }
+                setPostSize(response.data.PostSize);
             }else{
                 alert("상품들을 가져오는데 실패했습니다");
             }
         })
-    }, [])
+    }
+
+    const loadMoreHandler = ()=>{
+        let skip = Skip + Limit; // 0+8, 8+8
+        let body = {
+            skip: skip,
+            limit: Limit,
+            loadMore: true //더보기 버튼을 눌렀을 때 req로 받아오는 값
+        }
+        getProducts(body);
+        setSkip(skip);
+        setLimit(Limit);
+    }
 
     const renderCards = Products.map((product, index)=>{
-        console.log(product);
+        //console.log(product);
         return (
-                <CardList><img src={`http://localhost:8000/${product.images[0]}`} /></CardList>
+            <Col lg={6} md={8} sm={24} key={index}>
+                <Card cover={<ImgSlider images={product.images} />}>
+                        <Meta title={product.title} description={product.price}/>
+                </Card> 
+            </Col>
         )
     })
 
@@ -63,13 +87,16 @@ function Home() {
             {/* 필터 */}
             {/* 검색 */}
             {/* 카드 */}
-            <CardBlock>
+            <Row gutter={[16,16]}>
                 {renderCards}
-            </CardBlock>        
+            </Row>
 
-            <AddMoreWrap>
-                <AddMoreBtn>더보기</AddMoreBtn>
-            </AddMoreWrap>
+            {PostSize >= Limit &&
+                <AddMoreWrap>
+                    <AddMoreBtn onClick={loadMoreHandler}>더보기</AddMoreBtn>
+                </AddMoreWrap>
+            }
+            
 
 
         </HomeBlock>
