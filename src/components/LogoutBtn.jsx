@@ -4,8 +4,9 @@ import { withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../_actions/user_actions";
 
-const Logout = styled.p`
+const Logout = styled.a`
   cursor: pointer;
+  color: #000;
 `;
 
 function LogoutBtn(props) {

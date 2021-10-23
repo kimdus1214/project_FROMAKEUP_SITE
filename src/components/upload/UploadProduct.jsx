@@ -52,7 +52,7 @@ const UploadProductBtn = styled.button`
 
 const Continents = [
     {key:1, value:"클렌징"},
-    {key:2, value:"스킨"},
+    {key:2, value:"스킨케어"},
     {key:3, value:"눈가케어"},
     {key:4, value:"집중케어"},
     {key:5, value:"헤어/바디"},

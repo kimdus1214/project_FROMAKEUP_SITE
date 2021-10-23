@@ -2,7 +2,12 @@
   margin: 0;
   padding: 0;
 }
-
-ul,li,ol{
+a{
+  text-decoration: none;
+  color: #000;
+}
+ul,li,ol,dl{
   list-style: none;
+  margin-top: 0;
+  margin-bottom: 0;
 }

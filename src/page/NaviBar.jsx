@@ -20,6 +20,8 @@ const NaviWrap = styled.div`
 `;
 const NaviUser = styled.ul`
     display: flex;
+    margin: 0;
+    align-items: center;
 `;
 const Navi = styled.li`
     font-size: 1.1rem;
