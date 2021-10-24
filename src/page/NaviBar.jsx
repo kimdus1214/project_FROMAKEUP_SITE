@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoutBtn from '../components/LogoutBtn';
 import { useSelector } from "react-redux";
+import {Badge} from 'antd';
+import { MdShoppingCart } from "react-icons/md";
 
 const NaviBlock = styled.div`
     width: 100%;
@@ -26,6 +28,10 @@ const NaviUser = styled.ul`
 const Navi = styled.li`
     font-size: 1.1rem;
     margin-left: 20px;
+
+    svg{
+        font-size: 1.8rem;
+    }
 `;
 
 function NaviBar() {
@@ -41,7 +47,9 @@ function NaviBar() {
                         <Navi>
                             <NavLink to="/login" style={{color: '#000'}}>로그인</NavLink>
                         </Navi>
-                        <Navi><NavLink to="/register" style={{color: '#000'}}>회원가입</NavLink></Navi>
+                        <Navi>
+                            <NavLink to="/register" style={{color: '#000'}}>회원가입</NavLink>
+                        </Navi>
                     </NaviUser>
                 </NaviWrap>
             </NaviBlock>
@@ -52,8 +60,19 @@ function NaviBar() {
                 <NaviWrap>
                     <NavLink to="/" style={{fontSize: '1.2rem'}}>Home</NavLink>
                     <NaviUser>
-                        <Navi><NavLink to="/product/upload" style={{color: '#000'}}>상품등록</NavLink></Navi>
-                        <Navi><LogoutBtn /></Navi>
+                        <Navi>
+                            <NavLink to="/product/upload" style={{color: '#000'}}>상품등록</NavLink>
+                        </Navi>
+                        <Navi>
+                            <Badge count={5}>
+                                <NavLink to="/user/cart" style={{color: '#000'}}>
+                                    <MdShoppingCart />
+                                </NavLink>
+                            </Badge>
+                        </Navi>
+                        <Navi>
+                            <LogoutBtn />
+                        </Navi>
                     </NaviUser>
                 </NaviWrap>
             </NaviBlock>

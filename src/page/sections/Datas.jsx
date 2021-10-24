@@ -29,6 +29,40 @@ const continents = [
     }
 ]
 
+const price = [
+    {
+        "_id" : 0,
+        "name" : "전체",
+        "array" : []
+    },
+    {
+        "_id" : 1,
+        "name" : "0~1만원대",
+        "array" : [0, 19900]
+    },
+    {
+        "_id" : 2,
+        "name" : "2만원대",
+        "array" : [20000, 29900]
+    },
+    {
+        "_id" : 3,
+        "name" : "3만원대",
+        "array" : [30000, 39900]
+    },
+    {
+        "_id" : 4,
+        "name" : "4만원대",
+        "array" : [40000, 49900]
+    },
+    {
+        "_id" : 5,
+        "name" : "5만원대",
+        "array" : [50000, 59900]
+    }
+]
+
 export {
-    continents
+    continents,
+    price
 }

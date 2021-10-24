@@ -6,7 +6,9 @@ import {Row , Col , Card} from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import ImgSlider from '../components/utils/ImgSlider';
 import CheckBox from './sections/CheckBox';
-import { continents } from './sections/Datas';
+import RadioBox from './sections/RadioBox';
+import SearchFeature from './sections/SearchFeature';
+import { continents, price } from './sections/Datas';
 
 const HomeBlock = styled.div`
     width: 75%;
@@ -41,6 +43,12 @@ const AddMoreBtn = styled.button`
     }
 `;
 
+const SearchBlock = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin: 1rem auto;
+`;
+
 function Home() {
     const [Products, setProducts] = useState([]);
     const [Skip, setSkip] = useState(0); //불러올 때 0부터 시작
@@ -50,6 +58,8 @@ function Home() {
         continent: [],
         price: []
     });
+    const [SearchTerm, setSearchTerm] = useState('');
+
 
     useEffect(() => {
         let body = {
@@ -92,12 +102,13 @@ function Home() {
         //console.log(product);
         return (
             <Col lg={6} md={8} sm={24} key={index}>
-                <CardBlock cover={<ImgSlider images={product.images} />}>
+                <CardBlock cover={<a href={`/product/${product._id}`}><ImgSlider images={product.images} /></a>}>
                         <Meta title={product.title} description={product.price}/>
                 </CardBlock> 
             </Col>
         )
     })
+
 
     const showFilterdResults = (filters)=>{
         let body = {
@@ -109,12 +120,43 @@ function Home() {
         setSkip(0);
     }
 
+
+    const handlePrice = (value) => {
+        const data = price;
+        let array = [];
+
+        for(let key in data){
+            if(data[key]._id === parseInt(value, 10)){
+                array = data[key].array;
+            }
+        }
+        return array;
+    }
+
     const handleFilters = (filters, category)=>{ //filters 체크된 아이디가 담긴 새로운 배열이 담겨있음
         const newFilters = {...Filters}; //continents or price의 배열이 풀어져서 존재
         newFilters[category] = filters; //CheckBox에서 newCheckd[1,2,3]을 받아오면 넣어줌
 
+        console.log("filters", filters);
+        if(category==="price"){
+            let priceValues = handlePrice(filters); //console로 찍어본 거
+            newFilters[category] = priceValues;
+        }
         showFilterdResults(newFilters);
+        setFilters(newFilters);
     } 
+
+    const updateSearchTerm = (newSearchTerm) => {
+        let body = {
+            skip: 0,
+            limit: Limit,
+            filters: Filters,
+            searchTerm: newSearchTerm
+        }
+        setSkip(0);
+        setSearchTerm(newSearchTerm);
+        getProducts(body);
+    }
 
     return (
         <HomeBlock>
@@ -123,11 +165,22 @@ function Home() {
             </HomeTitWrap>
 
             {/* 필터 */}
-            <CheckBox list={continents} handleFilters={filters => handleFilters(filters, "continent")}/>
-            {/* 입력받은 filter: CheckBox에서 부모 컴포넌트(Home)로 전달한 newChecked
-            continent: 몽고디비-몽구스 스키마로 타입 지정해둔 이름(카테고리)에 해당하는 데이터를 가져옴 */}
+            <Row gutter={[16,16]}>
+                <Col lg={12} xs={24}>
+                    <CheckBox list={continents} handleFilters={filters => handleFilters(filters, "continent")}/>
+                    {/* 입력받은 filter: CheckBox에서 부모 컴포넌트(Home)로 전달한 newChecked
+                    continent: 몽고디비-몽구스 스키마로 타입 지정해둔 이름(카테고리)에 해당하는 데이터를 가져옴 */}
+                </Col>
+                <Col lg={12} xs={24}>
+                    <RadioBox list={price} handleFilters={filters => handleFilters(filters, "price")}/>
+                </Col>
+            </Row>
 
             {/* 검색 */}
+            <SearchBlock>
+                <SearchFeature refreshFuntion={updateSearchTerm}/>
+            </SearchBlock>
+
             {/* 카드 */}
             <Row gutter={[16,16]}>
                 {renderCards}

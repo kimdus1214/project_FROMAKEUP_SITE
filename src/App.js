@@ -8,6 +8,8 @@ import Register from './page/Register';
 import {lightTheme} from './theme/theme';
 import Auth from '../src/hoc/auth';
 import UploadProduct from "./components/upload/UploadProduct";
+import DetailProduct from "./page/detailProductPage/DetailProduct";
+import Cart from "./page/cartPage/Cart";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route exact path="/login" component={Auth(Login, false)}/>
         <Route exact path="/register" component={Auth(Register, false)}/>
         <Route exact path="/product/upload" component={Auth(UploadProduct, true, true)}/>
+        <Route exact path="/product/:productId" component={Auth(DetailProduct, null)}/>
+        <Route exact path="/user/cart" component={Auth(Cart, true)}/>
       </Switch>
     </ThemeProvider>
   );

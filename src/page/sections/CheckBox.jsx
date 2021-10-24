@@ -24,14 +24,14 @@ function CheckBox(props) {
         <React.Fragment key={index}>
             <Checkbox onChange={()=>checkToggle(val._id)}
                 checked={Checked.indexOf(val._id) === -1 ? false : true}/>
-            <span>{val.name}</span>
+            <span>&nbsp;{val.name}&nbsp;  </span>
         </React.Fragment>
     ))
 
     return (
         <div>
-            <Collapse defaultActiveKey={['1']} >
-                <Panel header="원하시는 상품을 클릭해주세요" key="1">
+            <Collapse defaultActiveKey={['0']} >
+                <Panel header="원하시는 상품을 선택해주세요" key="1">
                    {renderCheckBoxLists()}
                    
                 </Panel>
