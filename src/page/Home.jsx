@@ -9,6 +9,7 @@ import CheckBox from './sections/CheckBox';
 import RadioBox from './sections/RadioBox';
 import SearchFeature from './sections/SearchFeature';
 import { continents, price } from './sections/Datas';
+import { NavLink } from 'react-router-dom';
 
 const HomeBlock = styled.div`
     width: 75%;
@@ -102,8 +103,8 @@ function Home() {
         //console.log(product);
         return (
             <Col lg={6} md={8} sm={24} key={index}>
-                <CardBlock cover={<a href={`/product/${product._id}`}><ImgSlider images={product.images} /></a>}>
-                        <Meta title={product.title} description={product.price}/>
+                <CardBlock cover={<NavLink to={`/product/${product._id}`}><ImgSlider images={product.images} /></NavLink>}>
+                        <Meta title={product.title} description={`${product.price} won`}/>
                 </CardBlock> 
             </Col>
         )
@@ -127,15 +128,16 @@ function Home() {
 
         for(let key in data){
             if(data[key]._id === parseInt(value, 10)){
-                array = data[key].array;
+                array = data[key].array; //[0,29900]
             }
+            console.log(data[key]);
         }
         return array;
     }
 
     const handleFilters = (filters, category)=>{ //filters 체크된 아이디가 담긴 새로운 배열이 담겨있음
-        const newFilters = {...Filters}; //continents or price의 배열이 풀어져서 존재
-        newFilters[category] = filters; //CheckBox에서 newCheckd[1,2,3]을 받아오면 넣어줌
+        const newFilters = {...Filters}; //continents 와 price의 배열이 풀어져서 존재
+        newFilters[category] = filters; //continents or price의 배열 <= CheckBox에서 newCheckd[1,2,3]을 받아오면 넣어줌
 
         console.log("filters", filters);
         if(category==="price"){
@@ -143,7 +145,7 @@ function Home() {
             newFilters[category] = priceValues;
         }
         showFilterdResults(newFilters);
-        setFilters(newFilters);
+        setFilters(newFilters); //안해주면 현재 선택된 필터 배열만 나옴
     } 
 
     const updateSearchTerm = (newSearchTerm) => {

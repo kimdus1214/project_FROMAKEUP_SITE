@@ -10,7 +10,7 @@ function SearchFeature(props) {
     }
     return (
         <>
-             <Search placeholder="input search text" onChange={searchHandler} value={SearchTerm} style={{ width: 200 }} />
+             <Search placeholder="검색어 입력" onChange={searchHandler} value={SearchTerm} style={{ width: '200px' }} />
         </>
     )
 }

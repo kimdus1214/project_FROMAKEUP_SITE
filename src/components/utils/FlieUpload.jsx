@@ -27,7 +27,7 @@ const FileConfirm = styled.div`
     display: flex;
     width: 400px;
     height: 240px;
-    overflow-y: scroll;
+    overflow-x: scroll;
     
     div{
         width: 100%;
@@ -42,7 +42,7 @@ const FileConfirm = styled.div`
 `;
 
 function FlieUpload(props) {
-    const [Images, setImages] = useState([]);
+    const [Images, setImages] = useState([]); //업로드시 저장할 장소 필요
 
     const dropHandler = (files)=>{
         let formData = new FormData();

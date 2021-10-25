@@ -18,7 +18,7 @@ function ProductInfo(props) {
 
     return (
         <div>
-            <Descriptions title="상품 정보">
+            <Descriptions title="상품 정보" bordered>
                 <Descriptions.Item label="가격">{props.detail.price}</Descriptions.Item>
                 <Descriptions.Item label="재고">{props.detail.sold}</Descriptions.Item>
                 <Descriptions.Item label="조회수">{props.detail.veiws}</Descriptions.Item>

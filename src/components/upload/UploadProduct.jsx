@@ -86,7 +86,7 @@ function UploadProduct(props) {
 
         //서버 정보를 req으로 보냄
         const body = {
-            //login user id
+            //로그인된 사람의 id auth에 user를 넣어줬으므로 props로 user에 대한 모든 정보를 가져옴
             writer: props.user.userData._id,
             title: Title,
             description: Desc,

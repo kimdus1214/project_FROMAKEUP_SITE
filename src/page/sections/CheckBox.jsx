@@ -8,7 +8,7 @@ function CheckBox(props) {
         //누른 Index를 구함
         const currentIdx = Checked.indexOf(value);
         //전체 Checked된 state에서 현재 누른 checkBox가 이미 있다면
-        const newChecked = [...Checked];
+        const newChecked = [...Checked]; //전체 체크된 state를 가져와서
         if(currentIdx === -1){ //해당 인덱스 없으면 넣어주고
             newChecked.push(value);
         }else{ //있으면 빼주고
