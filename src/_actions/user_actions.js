@@ -1,11 +1,14 @@
 import axios from "axios";
+import {
+  REGISTER_USER,
+  LOGIN_USER,
+  LOGOUT_USER, 
+  AUTH_USER,
+  ADD_TO_CART,
+  GET_CART_ITEMS,
+  REMOVE_CART_ITEMS,
+} from './type'
 
-export const REGISTER_USER = "REGISTER_USER";
-export const LOGIN_USER = "LOGIN_USER";
-export const LOGOUT_USER = "LOGOUT_USER";
-export const AUTH_USER = "AUTH_USER";
-export const ADD_TO_CART = "ADD_TO_CART";
-export const GET_CART_ITEMS = "GET_CART_ITEMS";
 
 export function registerUser(dataToSubmit) {
   const request = axios
@@ -74,7 +77,7 @@ export function getCartItems(cartItems, userCart) {
           }
         })
       })
-      console.log(response.data);
+      //console.log(response.data);
       return response.data;
     }
   );
@@ -84,3 +87,23 @@ export function getCartItems(cartItems, userCart) {
   };
 }
 
+export function removeCartItems(productId) {
+  const request = axios
+    .get(`/user/removeFromCart?id=${productId}`)
+    .then((response) =>{
+      //productInfo, cart 정보를 조합해서 CartDetail 만듦
+      response.data.cart.forEach(item=>{
+        response.data.productInfo.forEach((product, index)=>{
+          if(item.id === product._id){
+            response.data.productInfo[index].quantity = item.quantity
+          }
+        })
+      })
+      return response.data;
+    }
+  );
+  return {
+    type: REMOVE_CART_ITEMS,
+    payload: request,
+  };
+}

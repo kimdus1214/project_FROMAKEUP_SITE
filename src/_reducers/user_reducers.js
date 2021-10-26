@@ -4,8 +4,9 @@ import {
   LOGOUT_USER,
   AUTH_USER,
   ADD_TO_CART,
-  GET_CART_ITEMS
-} from "../_actions/user_actions";
+  GET_CART_ITEMS,
+  REMOVE_CART_ITEMS
+} from "../_actions/type";
 
 export default function user(state = {}, action) {
   switch (action.type) {
@@ -32,6 +33,15 @@ export default function user(state = {}, action) {
       // eslint-disable-next-line
     case GET_CART_ITEMS:
       return { ...state, cartDetail: action.payload }
+    // eslint-disable-next-line
+    case REMOVE_CART_ITEMS:
+      return { ...state, //userData의 cart를 하나 없애줘야 되고, cartDetail도 하나 없애줘야함
+        cartDetail: action.payload.productInfo,
+        userData: {
+          ...state.userData,
+          cart: action.payload.cart
+        }
+      }
     // eslint-disable-next-line
     default:
       return state;

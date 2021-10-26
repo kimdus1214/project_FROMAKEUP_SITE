@@ -36,8 +36,7 @@ const Navi = styled.li`
 
 function NaviBar() {
     const user = useSelector(state => state.user);
-    //console.log(user.userData);
-
+    
     if (user.userData && !user.userData.isAuth) {
         return (
             <NaviBlock>
@@ -64,7 +63,7 @@ function NaviBar() {
                             <NavLink to="/product/upload" style={{color: '#000'}}>상품등록</NavLink>
                         </Navi>
                         <Navi>
-                            <Badge count={5}>
+                            <Badge count={user.userData && user.userData.cart.length} >
                                 <NavLink to="/user/cart" style={{color: '#000'}}>
                                     <MdShoppingCart />
                                 </NavLink>
