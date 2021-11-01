@@ -6,13 +6,12 @@ import axios from 'axios';
 
 const FlieUploadBlock = styled.div`
     display: flex;
-    justify-content: space-betewen;
     margin-bottom: 50px;
 `;
 
 const FileUploadWrap = styled.div`
-    width: 300px;
-    height: 240px;
+    width: 50%;
+    height: 300px;
     border: 1px solid #ddd;
     display: flex;
     justify-content: center;
@@ -25,8 +24,8 @@ const FileUploadWrap = styled.div`
 `;
 const FileConfirm = styled.div`
     display: flex;
-    width: 400px;
-    height: 240px;
+    width: 50%;
+    height: 300px;
     overflow-x: scroll;
     
     div{
@@ -36,6 +35,7 @@ const FileConfirm = styled.div`
         img{
             min-width: 300px;
             width: 300px;
+            height: auto;
             overflow-x: scroll;
         }
     }
@@ -55,7 +55,7 @@ function FlieUpload(props) {
         axios.post('/product/image', formData, config)
         .then(respense=>{
             if(respense.data.success){
-                console.log(respense.data);
+                //console.log(respense.data);
                 setImages([...Images, respense.data.filePath]);
 
                 //이미지 스테이트가 바뀌는 곳

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import FlieUpload from '../utils/FlieUpload';
 
 const UploadProductBlock = styled.div`
-    max-width: 700px;
+    max-width: 500px;
     margin: 2rem auto;
 `;
 
@@ -31,6 +31,7 @@ const UploadLabel = styled.div`
     }
 
     textarea{
+        width: 100%;
         height: 60px;
         padding: 10px;
         box-sizing: border-box;
@@ -38,16 +39,18 @@ const UploadLabel = styled.div`
     }
 
     select{
-        width: 50%;
+        width: 100%;
         height: 40px;
-        margin-top: 15px;
         margin-bottom: 15px;
         outline: none;
     }
 `;
 
 const UploadProductBtn = styled.button`
-    padding: 10px 20px;
+    width: 100%;
+    padding: 15px 0;
+    margin-bottom: 2.5rem;
+    margin-top: 1rem;
 `;
 
 const Continents = [
@@ -114,7 +117,6 @@ function UploadProduct(props) {
             <UploadForm onSubmit={submitHandler}>
                 {/* 파일업로드 */}
                 <FlieUpload refreshFunction={updateImgs} />
-
                 <UploadLabel>
                     <label>상품명</label>
                     <input onChange={titleChange} value={Title}/>
@@ -128,6 +130,7 @@ function UploadProduct(props) {
                     <textarea onChange={descChange} value={Desc} />
                 </UploadLabel>
                 <UploadLabel onChange={continentChange} value={Continent}>
+                    <label>분류</label>
                     <select>
                         {Continents.map(item=> (
                             <option key={item.key} value={item.key}>{item.value}</option>

@@ -39,7 +39,7 @@ function UserCartBlock(props) {
                     {product.price}
                 </td>
                 <td>
-                    <button onClick={()=>props.removeItem(product._id)}>remove</button>
+                    <button onClick={()=>props.removeItem(product._id)}>삭제</button>
                 </td>
             </tr>
         ))
