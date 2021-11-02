@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {useDispatch} from 'react-redux';
-import {getCartItems, removeCartItems} from '../../_actions/user_actions';
+import {getCartItems, removeCartItems, onSuccessBuy} from '../../_actions/user_actions';
 import UserCartBlock from './sections/UserCartBlock';
 import styled from 'styled-components';
-import { Empty } from 'antd';
+import { Empty, Result } from 'antd';
 import Paypal from '../../components/utils/Paypal';
 
 const CartBlock = styled.div`
@@ -30,6 +30,7 @@ function Cart(props) {
     const dispatch = useDispatch();
     const [Total, setTotal] = useState(0);
     const [ShowTotal, setShowTotal] = useState(false);
+    const [ShowSuccess, setShowSuccess] = useState(false);
     
     useEffect(()=>{
         let cartItems =[];
@@ -66,6 +67,24 @@ function Cart(props) {
             }
         })
     }
+
+    const transactionSuccess = (data) =>{
+        // 액션에 두 가지를 넘겨줘야함
+        // payment, user 컬렉션에 정보를 각각 저장해야하므로,
+        // paymentData: 결제 성공 후 paypal에서 전달하는 정보
+        // cartDetail 정보
+        dispatch(onSuccessBuy({
+            paymentData : data,
+            cartDetail: props.user.cartDetail
+        }))
+        .then(response=>{
+            if(response.payload.success){
+                setShowTotal(false);
+                setShowSuccess(true);
+            }
+        })
+    }
+
     return (
         <CartBlock>
             <h1>장바구니</h1>
@@ -77,11 +96,20 @@ function Cart(props) {
                 <UserPrice>
                     <h2>Total: {Total}원</h2>
                 </UserPrice>
-            : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />                
+            : ShowSuccess ? 
+                <Result
+                status="success"
+                title="Successfully Purchased Cloud Server ECS!"
+                />
+                : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
             }
-            <PaypalBlock>
-                <Paypal />
-            </PaypalBlock>           
+
+            {ShowTotal && 
+                <PaypalBlock>
+                    <Paypal total={Total} onSuccess={transactionSuccess}/>
+                </PaypalBlock>   
+            }
+                    
         </CartBlock>
     )
 }

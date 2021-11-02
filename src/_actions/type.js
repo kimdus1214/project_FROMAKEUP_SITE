@@ -7,3 +7,4 @@ export const GET_CART_ITEMS = "GET_CART_ITEMS";
 export const REMOVE_CART_ITEMS = "REMOVE_CART_ITEMS";
 export const CART_COUNT = "CART_COUNT";
 export const THEME_CHANGE = "THEME_CHANGE";
+export const ON_SUCCESS_BUY = "ON_SUCCESS_BUY";

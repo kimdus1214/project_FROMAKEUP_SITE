@@ -102,7 +102,7 @@ function Home() {
     const renderCards = Products.map((product, index)=>{
         //console.log(product);
         return (
-            <Col lg={6} md={8} sm={24} key={index}>
+            <Col lg={6} md={12} sm={24} key={index}>
                 <CardBlock cover={<NavLink to={`/product/${product._id}`}><ImgSlider images={product.images} /></NavLink>}>
                         <Meta title={product.title} description={`${product.price} won`}/>
                 </CardBlock> 

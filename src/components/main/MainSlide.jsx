@@ -1,9 +1,5 @@
 import React from 'react';
-import Slider from "react-slick";
-import styled from 'styled-components';
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { Carousel } from 'antd';
 
 const mainImgs = [
     {
@@ -11,46 +7,31 @@ const mainImgs = [
         alt: "mainSlide"
     },
     {
-        src: "assets/main01.jpg",
+        src: "assets/main02.jpg",
         alt: "mainSlide"
     },
     {
-        src: "assets/main01.jpg",
+        src: "assets/main03.jpg",
         alt: "mainSlide"
     },
     {
-        src: "assets/main01.jpg",
+        src: "assets/main04.jpg",
         alt: "mainSlide"
     }
 ]
+
 function ImgSlide() {
-    const settings = {
-        dots: true,
-        fade: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-    };
       return (
-        <div>
-          <StyledSlider {...settings}>
-            {mainImgs.map((img, index)=>(
+        <Carousel effect="fade">
+        {mainImgs.map((img, index)=>(
                 <div key={index}>
                     <img src={img.src} alt={img.alt} />
                 </div>
-            ))
-
-            }
-          </StyledSlider>
-        </div>
+        ))
+        }
+      </Carousel>
       );
 }
 
 export default ImgSlide;
 
-const StyledSlider = styled(Slider)`
-    .slick-dots{
-      bottom: 20px;
-    }
-`;
