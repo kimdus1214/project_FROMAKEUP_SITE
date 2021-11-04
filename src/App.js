@@ -10,6 +10,7 @@ import Auth from '../src/hoc/auth';
 import UploadProduct from "./components/upload/UploadProduct";
 import DetailProduct from "./page/detailProductPage/DetailProduct";
 import Cart from "./page/cartPage/Cart";
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route exact path="/product/:productId" component={Auth(DetailProduct, null)}/>
         <Route exact path="/user/cart" component={Auth(Cart, true)}/>
       </Switch>
+      <Footer />
     </ThemeProvider>
   );
 }

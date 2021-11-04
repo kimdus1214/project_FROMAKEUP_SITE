@@ -30,7 +30,6 @@ const AddMoreWrap = styled.div`
 `;
 
 const AddMoreBtn = styled.button`
-    margin-bottom: 5rem;
     padding: 12px 35px;
     border-radius: 5px;
     cursor: pointer;

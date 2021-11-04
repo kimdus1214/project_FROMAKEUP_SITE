@@ -10,6 +10,8 @@ const NaviBlock = styled.div`
     width: 100%;
     height: 80px;
     position: relative;
+    background: #fff;
+    box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, .2);
 `;
 
 const NaviWrap = styled.div`
@@ -41,7 +43,7 @@ function NaviBar() {
         return (
             <NaviBlock>
                 <NaviWrap>
-                    <NavLink to="/" style={{fontSize: '1.2rem', color: '#000'}}>Home</NavLink>
+                    <NavLink to="/" style={{fontSize: '1.5rem', color: '#000', fontWeight:'600'}}>FROMAKEUP</NavLink>
                     <NaviUser>
                         <Navi>
                             <NavLink to="/login" style={{color: '#000'}}>로그인</NavLink>
@@ -57,7 +59,7 @@ function NaviBar() {
         return(
             <NaviBlock>
                 <NaviWrap>
-                    <NavLink to="/" style={{fontSize: '1.2rem'}}>Home</NavLink>
+                    <NavLink to="/" style={{fontSize: '1.5rem'}}>FROMAKEUP</NavLink>
                     <NaviUser>
                         <Navi>
                             <NavLink to="/product/upload" style={{color: '#000'}}>상품등록</NavLink>
